@@ -1,0 +1,34 @@
+<div>
+  Title:
+  <%= @suggestion.title.titleize %>
+
+  Text:
+  <%= @suggestion.body %>
+</div>
+<p>Created By: <%= @question.user.first_name if @question.user %></p>
+<% if @question.liked_by?(current_user) %>
+  <%= link_to "you like this",
+              suggestion_like_path(@suggestion, @suggestion.like_for(current_user)),
+              method: :delete %>
+<% else %>
+  <%= link_to "you could like this",
+              suggestion_likes_path(@suggestion),
+              method: :post %>
+<% end %>
+(<%= @suggestion.likes.count %>)
+
+<% if can? :manage, @suggestion %>
+  <%= link_to "Delete", question_path(@question),                        method: :delete, data:   {confirm: "Are you sure?"} %>
+<% end %>
+
+<% if @suggestion.membership_added_by?(current_user) %>
+  <%= link_to "Leave Group",
+              question_membership_path(@suggestion, current_user_membership),
+              method: :delete,
+              data: {disable_with: "...."} %>
+ (<%= @suggestion.membership_sum %>)
+<% else  %>
+ <%= link_to "Join Group",
+             suggestion_memberships_path(@question, {membership: {is_up: true}}),
+             method: :post %>
+ (<%= @suggestion.membership_sum %>)

@@ -1,0 +1,6 @@
+<h1>Suggestions you liked:</h1>
+
+<% @suggstions.each do |suggestion| %>
+  <%= link_to suggestion.title, suggestion %>
+  <hr>
+<% end %>

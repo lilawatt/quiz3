@@ -1,0 +1,12 @@
+<%= @suggestion.errors.full_messages.join(", ") %>
+<%= form_for @suggestion do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,7 @@
+<h1>Suggestions</h1>
+
+<% @suggstions.each do |suggestion| %>
+  <%= link_to suggestion.title, suggestion_path(suggestion) %>
+  <hr>
+<% end %>
+<%= paginate @suggstions %>
